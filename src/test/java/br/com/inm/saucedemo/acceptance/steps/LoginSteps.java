@@ -87,7 +87,7 @@ public class LoginSteps {
 				break;
 			}
 			default:{
-				usuario = MassaUiLogin.USUARIO_OK_USERNAME;
+				senha = MassaUiLogin.SENHA_OK;
 				break;
 			}
 		}
@@ -114,6 +114,10 @@ public class LoginSteps {
 				assertTrue(paginalogin.mensagemErroUsuarioESenhaNaoCombinamExibida());
 				break;
 			}
+			case "o usuario esta bloqueado":{
+				assertTrue(paginalogin.mensagemErroUsuarioBloqueadoExibida());
+				break;
+			}
 			default:{
 				assertTrue(false,"Mensagem de erro computada não condizente");
 				break;
@@ -122,6 +126,13 @@ public class LoginSteps {
 		
 		paginalogin.clean();
 
+	}
+	
+	@Dado("um usuario valido e bloqueado")
+	public void um_usuario_valido_e_bloqueado() {
+		paginalogin = new LoginPage(navegador);
+	    usuario = MassaUiLogin.USUARIO_BLOQUEADO_USERNAME;
+	    senha = MassaUiLogin.SENHA_OK;
 	}
 	
 }

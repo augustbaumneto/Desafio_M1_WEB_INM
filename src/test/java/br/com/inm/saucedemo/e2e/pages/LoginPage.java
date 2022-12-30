@@ -1,12 +1,13 @@
 package br.com.inm.saucedemo.e2e.pages;
 
-import java.util.function.BooleanSupplier;
+
+
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 
 /**
@@ -18,6 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class LoginPage extends ObjectPageBase {
 
+	
+
 	private static String URL_LOGIN_PAGE = "https://www.saucedemo.com/";
 
 	private static String ID_CAMPO_USERNAME = "user-name";
@@ -28,7 +31,7 @@ public class LoginPage extends ObjectPageBase {
 	private static String MSG_ERRO_USUARIOFALTANDO ="Epic sadface: Username is required";
 	private static String MSG_ERRO_SENHAFALTANDO ="Epic sadface: Password is required";
 	private static String MSG_ERRO_USUARIOEOUSENHAERRADOS ="Epic sadface: Username and password do not match any user in this service";
-	
+	private static String MSG_ERRO_USUARIOBLOQUEADO = "Epic sadface: Sorry, this user has been locked out.";
 	/**
 	 * 
 	 * Construtor do primeiro acesso
@@ -59,7 +62,6 @@ public class LoginPage extends ObjectPageBase {
      */
     public void preencheDadosLogin(String nome, String senha) {
     	
-
         WebElement camponome = this.driver.findElement(By.id(ID_CAMPO_USERNAME));
         WebElement camposenha = this.driver.findElement(By.id(ID_CAMPO_PASSWORD));
 
@@ -96,13 +98,7 @@ public class LoginPage extends ObjectPageBase {
 		
 		return ePaginaAtual(URL_LOGIN_PAGE);
 	}
-/*	
-	public void esperaCarregarPaginaDeLeiloes() {
-		WebDriverWait wait = new WebDriverWait(driver,2);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Todos leilões')]")));
-	}
 
-*/
 
 	/**
 	 * 
@@ -112,7 +108,6 @@ public class LoginPage extends ObjectPageBase {
 	 */
 	public boolean mensagemErroUsuarioESenhaNaoCombinamExibida() {
 		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		System.out.println(labelerro.getText());
 		return labelerro.getText().equals(MSG_ERRO_USUARIOEOUSENHAERRADOS);
 	}
 	
@@ -124,7 +119,6 @@ public class LoginPage extends ObjectPageBase {
 	 */
 	public boolean mensagemErroFaltaSenhaExibida() {
 		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		System.out.println(labelerro.getText());
 		return labelerro.getText().equals(MSG_ERRO_SENHAFALTANDO);
 	}
 	
@@ -136,8 +130,18 @@ public class LoginPage extends ObjectPageBase {
 	 */
 	public boolean mensagemErroFaltaUsuarioExibida() {
 		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		System.out.println(labelerro.getText());
 		return labelerro.getText().equals(MSG_ERRO_USUARIOFALTANDO);
+	}
+
+	/**
+	 * 
+	 * Verifica se a mensagem de erro de usuario bloqueado é exibida
+	 * 
+	 * @return
+	 */
+	public boolean mensagemErroUsuarioBloqueadoExibida() {
+		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
+		return labelerro.getText().equals(MSG_ERRO_USUARIOBLOQUEADO);
 	}
 	
 }

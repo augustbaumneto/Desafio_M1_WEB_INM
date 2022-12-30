@@ -35,7 +35,7 @@ public class BrowserFactory {
 			case "chrome":
 				return initChromeDriver();
 			default:
-				return new HtmlUnitDriver();
+				return new HtmlUnitDriver(true); //True para poder habilitar a execução de javascript
 		}
 	}
 

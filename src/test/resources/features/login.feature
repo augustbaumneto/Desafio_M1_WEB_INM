@@ -28,3 +28,9 @@ Funcionalidade: Apenas usuarios cadastrados podem se logar
     |incorreto|  vazia  |     senha é necessária     |
     |incorreto| correta |usuario e senha não combinam|
     |incorreto|incorreta|usuario e senha não combinam|
+    
+  Cenario: Um usuario valido bloqueado não consegue se logar
+    Dado um usuario valido e bloqueado
+    Quando tenta se logar
+    Entao deve continua na pagina de login
+    E mensagem de erro informando que 'o usuario esta bloqueado' é apresentada

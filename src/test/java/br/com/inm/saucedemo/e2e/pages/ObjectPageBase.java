@@ -3,6 +3,7 @@ package br.com.inm.saucedemo.e2e.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -64,6 +65,7 @@ public class ObjectPageBase {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT_PADRAO));
 		
 		driver.manage().window().maximize();
+		
 	}
 	
 	/**
@@ -85,6 +87,22 @@ public class ObjectPageBase {
 	protected boolean ePaginaAtual(String urlcomparacao) {
 		
 		return (driver.getCurrentUrl().equals(urlcomparacao));
+	}
+	
+	/**
+	 * Verifica se o elemento fornecido pelo localizador esta presente na página
+	 * 
+	 * @param localizador
+	 * @return
+	 */
+	protected boolean elementoEstaPresente(By localizador) {
+		try {
+			driver.findElement(localizador);
+			return true;
+		} catch (NoSuchElementException e) {
+
+			return false;
+		}
 	}
 	
 }
