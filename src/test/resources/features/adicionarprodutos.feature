@@ -14,14 +14,13 @@ Funcionalidade: O usuário ao se logar pode escolher e adicionar produtos no car
     Dado um usuario logado na página de inventário
     E carrinho esta vazio
     Quando escolho o produto '<produto>' e clico no botao adicionar no carrinho equivalente
-    Entao botão clicado deve ser alterado para remover
-    E carrinho deve indicar que possui um produto adicionado
+    Entao botão(s) clicado(s) deve(m) ser alterado(s) para remover
+    E carrinho deve indicar que possui 1 produtos adicionados
     Quando clicar no carrinho
     Entao deve ser direcionado para a página do carrinho
-    E deve ser exibido o item selecionado com os mesmos dados da página anterior
+    E deve ser exibido os itens selecionados com os mesmos dados da página anterior
 
-    
-      Exemplos:
+    Exemplos:
       |         produto				 |
       |   Sauce Labs Backpack  |
       |  Sauce Labs Bike Light |
@@ -29,3 +28,15 @@ Funcionalidade: O usuário ao se logar pode escolher e adicionar produtos no car
       |Sauce Labs Fleece Jacket|
       |    Sauce Labs Onesie   |
       |      T-Shirt (Red)     |
+      
+  Cenario: Adicionando dois produtos no carrinho pela tela de inventário com carrinho vazio
+    Dado um usuario logado na página de inventário
+    E carrinho esta vazio
+    Quando escolho dois produtos e clico no botao adicionar no carrinho equivalente de ambos
+    Entao botão(s) clicado(s) deve(m) ser alterado(s) para remover
+    E carrinho deve indicar que possui 2 produtos adicionados
+    Quando clicar no carrinho
+    Entao deve ser direcionado para a página do carrinho
+    E deve ser exibido os itens selecionados com os mesmos dados da página anterior  
+    
+      

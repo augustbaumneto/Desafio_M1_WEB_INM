@@ -6,14 +6,12 @@ package br.com.inm.saucedemo.acceptance.steps;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.inm.saucedemo.e2e.pages.CartPage;
 import br.com.inm.saucedemo.e2e.pages.InventarioPage;
 import br.com.inm.saucedemo.e2e.pages.LoginPage;
 import br.com.inm.saucedemo.massatestes.MassaUiBase;
 import br.com.inm.saucedemo.massatestes.MassaUiLogin;
+import br.com.inm.saucedemo.massatestes.MassaUiProdutos;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
@@ -31,12 +29,16 @@ public class AdicionarProdutosSteps {
 	private InventarioPage paginainventario;
 	private CartPage paginacarrinho;
 	
-	private String navegador = MassaUiBase.NAVEGADOR_INTERNO;
+	//Massas
+	private String navegador = MassaUiBase.NAVEGADOR_FIREFOX;
 	
 	private String usuario = MassaUiLogin.USUARIO_OK_USERNAME;
 	private String senha = MassaUiLogin.SENHA_OK;
 	
-	private List<String> itensadicionados = new ArrayList<>();
+	private String prod1 = MassaUiProdutos.PRODUTO1;
+	private String prod2 = MassaUiProdutos.PRODUTO5;
+	
+	
 	
 	@Dado("um usuario logado na página de inventário")
 	public void um_usuario_logado_na_página_de_inventário() {
@@ -54,18 +56,16 @@ public class AdicionarProdutosSteps {
 	@Quando("escolho o produto {string} e clico no botao adicionar no carrinho equivalente")
 	public void escolho_o_produto_e_clico_no_botao_adicionar_no_carrinho_equivalente(String produto) {
 	    assertTrue(paginainventario.adicionarProduto(produto),"Problem na massa!!! Produto inexistente");
-	    //Guarda os itens adicionados
-	    itensadicionados.add(produto);
 	}
 	
-	@Entao("botão clicado deve ser alterado para remover")
-	public void botão_clicado_deve_ser_alterado_para_remover() {
-	    assertTrue(paginainventario.verificaBotaoRemoverProduto(itensadicionados.get(0)));
+	@Entao("botão\\(s) clicado\\(s) deve\\(m) ser alterado\\(s) para remover")
+	public void botãos_clicados_devem_ser_alterados_para_remover() {
+	    assertTrue(paginainventario.verificaBotaoRemoverProduto());
 	}
 	
-	@Entao("carrinho deve indicar que possui um produto adicionado")
-	public void carrinho_deve_indicar_que_possui_um_produto_adicionado() {
-		assertTrue(paginainventario.quantidadeItensCarrinhoE(1));
+	@Entao("carrinho deve indicar que possui {int} produtos adicionados")
+	public void carrinho_deve_indicar_que_possui_um_produto_adicionado(int quantidade) {
+		assertTrue(paginainventario.quantidadeItensCarrinhoE(quantidade));
 	}
 	
 	@Quando("clicar no carrinho")
@@ -79,9 +79,16 @@ public class AdicionarProdutosSteps {
 		assertTrue(paginacarrinho.verificaTextoSeuCarrinho());
 	}
 	
-	@Entao("deve ser exibido o item selecionado com os mesmos dados da página anterior")
-	public void deve_ser_exibido_o_item_selecionado_com_os_mesmos_dados_da_página_anterior() {
-		assertTrue(paginacarrinho.verificaItens(itensadicionados));
+	@Entao("deve ser exibido os itens selecionados com os mesmos dados da página anterior")
+	public void deve_ser_exibido_os_itens_selecionados_com_os_mesmos_dados_da_página_anterior() {
+		assertTrue(paginacarrinho.verificaItensNoCarrinho());
+		paginacarrinho.clean();
+	}
+	
+	@Quando("escolho dois produtos e clico no botao adicionar no carrinho equivalente de ambos")
+	public void escolho_dois_produtos_e_clico_no_botao_adicionar_no_carrinho_equivalente_de_ambos() {
+		assertTrue(paginainventario.adicionarProduto(prod1),"Problem na massa!!! Produto inexistente");
+		assertTrue(paginainventario.adicionarProduto(prod2),"Problem na massa!!! Produto inexistente");
 
 	}
 	

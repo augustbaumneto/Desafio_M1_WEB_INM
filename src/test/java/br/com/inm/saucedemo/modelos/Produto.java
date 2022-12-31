@@ -28,33 +28,42 @@ public final class Produto {
 	/**
 	 * Construtor completo
 	 * 
-	 * @param nome_produto
 	 * @param localizador_nome_produto
 	 * @param localizador_link
-	 * @param descricao_produto
 	 * @param localizador_descricao
-	 * @param valor
 	 * @param localizador_valor
 	 * @param localizador_botao_adicionar
 	 * @param localizador_botao_remover
 	 */
 	
-	public Produto(String nome_produto, String localizador_nome_produto, String localizador_link, String descricao_produto, String localizador_descricao,
-			String valor, String localizador_valor, String localizador_botao_adicionar, String localizador_botao_remover) {
-		this.nome_produto = nome_produto;
+	public Produto(String localizador_nome_produto, String localizador_link, String localizador_descricao,
+			 String localizador_valor, String localizador_botao_adicionar, String localizador_botao_remover) {
+		this.nome_produto = null;
 		this.localizador_nome_produto = localizador_nome_produto;
 		this.localizador_link = localizador_link;
-		this.descricao_produto = descricao_produto;
+		this.descricao_produto = null;
 		this.localizador_descricao = localizador_descricao;
-		if (valor ==null) {
-			this.valor = BigDecimal.ZERO;
-		} else {
-			
-				this.valor = new BigDecimal(retiraCifrao(valor));
-		}
+		this.valor = BigDecimal.ZERO;
 		this.localizador_valor = localizador_valor;
 		this.localizador_botao_adicionar = localizador_botao_adicionar;
 		this.localizador_botao_remover = localizador_botao_remover;
+	}
+	
+	/**
+	 * Construtor semo botão adicionar para ser utilizando na CartPage
+	 * 
+	 * @param localizador_nome_produto
+	 * @param localizador_link
+	 * @param localizador_descricao
+	 * @param localizador_valor
+	 * @param localizador_botao_remover
+	 */
+	
+	public Produto(String localizador_nome_produto, String localizador_link, String localizador_descricao,
+			 String localizador_valor, String localizador_botao_remover) {
+		
+		this(localizador_nome_produto, localizador_link, localizador_descricao,
+			 localizador_valor, null, localizador_botao_remover);
 	}
 	
 	/**
@@ -195,6 +204,20 @@ public final class Produto {
 		}else {
 			return valor;
 		}
+	}
+	
+	/**
+	 * Verifica se os dados nome, descrição e valores são iguais nos dois produtos, caso algum seja 
+	 *    diferente retorna false.
+	 * 
+	 * @param produto
+	 * @return
+	 */
+	public boolean comparaDadosTextoCom(Produto produto) {
+		
+		return nome_produto.equals(produto.getNome_produto())&&
+				descricao_produto.equals(produto.getDescricao_produto())&&
+				valor.compareTo(produto.getValor())==0;
 	}
 	
 }

@@ -5,8 +5,10 @@ package br.com.inm.saucedemo.e2e.pages;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -25,14 +27,15 @@ import br.com.inm.saucedemo.modelos.Produto;
 public class InventarioPage extends ObjectPageBase {
 
 	
+    private List<Produto> produtoscarrinho = new ArrayList<>();
+	
+	private Map<String,Produto> mapaprodutos;
+	
 	private final static String URL_PAGINA_INVENTARIO = "https://www.saucedemo.com/inventory.html";
 	
 	private final static String CSSSELECTOR_LINK_CARRINHOCOMPRAS = "#shopping_cart_container .shopping_cart_link";
 	private final static String CSSSELECTOR_CONTEUDO_CARRINHOCOMPRAS = CSSSELECTOR_LINK_CARRINHOCOMPRAS
 																	+ " span";
-	
-	private Map<String,Produto> mapaprodutos;
-	
 	
 	private static final String BASE_PRODS="#inventory_container.inventory_container .inventory_item:nth-child";
 	//Dados produto 1
@@ -112,31 +115,38 @@ public class InventarioPage extends ObjectPageBase {
 	private void constroiMapa() {
 		mapaprodutos = new HashMap<>();
 		
-		mapaprodutos.put(GHERKIN_PROD1_BACKPACK, new Produto(null, CSS_LABEL_PROD1_TITULOBACKPACK, 
-				ID_LINK_PROD1_BACKPACK, null, CSS_LABEL_PROD1_DESCRICAOBACKPACK, null, 
+		mapaprodutos.put(GHERKIN_PROD1_BACKPACK, new Produto(CSS_LABEL_PROD1_TITULOBACKPACK, 
+				ID_LINK_PROD1_BACKPACK, CSS_LABEL_PROD1_DESCRICAOBACKPACK, 
 				CSS_LABEL_PROD1_PRECOBACKPACK, ID_BOTAO_PROD1_BACKPACK,ID_BOTAO_PROD1_REMOVERBACKPACK));
 		
-		mapaprodutos.put(GHERKIN_PROD2_BIKELIGHT,new Produto(null, CSS_LABEL_PROD2_TITULOBIKELIGHT, 
-				ID_LINK_PROD2_BIKELIGHT, null, CSS_LABEL_PROD2_DESCRICAOBIKELIGHT, null, 
+		mapaprodutos.put(GHERKIN_PROD2_BIKELIGHT,new Produto(CSS_LABEL_PROD2_TITULOBIKELIGHT, 
+				ID_LINK_PROD2_BIKELIGHT, CSS_LABEL_PROD2_DESCRICAOBIKELIGHT, 
 				CSS_LABEL_PROD2_PRECOBIKELIGHT, ID_BOTAO_PROD2_BIKELIGHT, ID_BOTAO_PROD2_REMOVERBIKELIGHT));
 		
-		mapaprodutos.put(GHERKIN_PROD3_BOLTTSHIRT,new Produto(null, CSS_LABEL_PROD3_TITULOBOLTTSHIRT, 
-				ID_LINK_PROD3_BOLTTSHIRT, null, CSS_LABEL_PROD3_DESCRICAOBOLTTSHIRT, null, 
+		mapaprodutos.put(GHERKIN_PROD3_BOLTTSHIRT,new Produto(CSS_LABEL_PROD3_TITULOBOLTTSHIRT, 
+				ID_LINK_PROD3_BOLTTSHIRT, CSS_LABEL_PROD3_DESCRICAOBOLTTSHIRT, 
 				CSS_LABEL_PROD3_PRECOBOLTTSHIRT, ID_BOTAO_PROD3_BOLTTSHIRT, ID_BOTAO_PROD3_REMOVERBOLTTSHIRT));
 		
-		mapaprodutos.put(GHERKIN_PROD4_FLEECEJACKET,new Produto(null, CSS_LABEL_PROD4_TITULOFLEECEJACKET, 
-				ID_LINK_PROD4_FLEECEJACKET, null, CSS_LABEL_PROD4_DESCRICAOFLEECEJACKET, null, 
+		mapaprodutos.put(GHERKIN_PROD4_FLEECEJACKET,new Produto(CSS_LABEL_PROD4_TITULOFLEECEJACKET, 
+				ID_LINK_PROD4_FLEECEJACKET, CSS_LABEL_PROD4_DESCRICAOFLEECEJACKET, 
 				CSS_LABEL_PROD4_PRECOFLEECEJACKET, ID_BOTAO_PROD4_FLEECEJACKET, ID_BOTAO_PROD4_REMOVERFLEECEJACKET));
 		
-		mapaprodutos.put(GHERKIN_PROD5_ONESIE,new Produto(null, CSS_LABEL_PROD5_TITULOONESIE, 
-				ID_LINK_PROD5_ONESIE, null, CSS_LABEL_PROD5_DESCRICAOONESIE, null, 
+		mapaprodutos.put(GHERKIN_PROD5_ONESIE,new Produto(CSS_LABEL_PROD5_TITULOONESIE, 
+				ID_LINK_PROD5_ONESIE, CSS_LABEL_PROD5_DESCRICAOONESIE,
 				CSS_LABEL_PROD5_PRECOONESIE, ID_BOTAO_PROD5_ONESIE, ID_BOTAO_PROD5_REMOVERONESIE));
 		
-		mapaprodutos.put(GHERKIN_PROD6_TSHIRTRED,new Produto(null, CSS_LABEL_PROD6_TITULOTSHIRTRED, 
-				ID_LINK_PROD6_TSHIRTRED, null, CSS_LABEL_PROD6_DESCRICAOTSHIRTRED, null, 
+		mapaprodutos.put(GHERKIN_PROD6_TSHIRTRED,new Produto(CSS_LABEL_PROD6_TITULOTSHIRTRED, 
+				ID_LINK_PROD6_TSHIRTRED, CSS_LABEL_PROD6_DESCRICAOTSHIRTRED, 
 				CSS_LABEL_PROD6_PRECOTSHIRTRED, ID_BOTAO_PROD6_TSHIRTRED, ID_BOTAO_PROD6_REMOVERTSHIRTRED));
 		
-		
+		capturaDadosValidacao();
+	}
+
+	/**
+	 * Classe responsável por captura dos da página que podem ser utilizados 
+	 *   para validações futuras e armazena dentro mapa
+	 */
+	private void capturaDadosValidacao() {
 		Iterator<Map.Entry<String,Produto>> itr = mapaprodutos.entrySet().iterator();
 		WebElement txtnome; 
 		WebElement txtdescricao; 
@@ -210,6 +220,7 @@ public class InventarioPage extends ObjectPageBase {
 		if (produtoadicionar!=null) {
 			WebElement botaoadicionar = driver.findElement(By.id(produtoadicionar.getLocalizador_botao()));
 			botaoadicionar.click();
+			produtoscarrinho.add(produtoadicionar);
 			return true;
 		} else {
 			return false;
@@ -218,20 +229,21 @@ public class InventarioPage extends ObjectPageBase {
 	}
 
 	/**
-	 * Verifica se o botão remover esta presenta na tela
-	 * @param produto
+	 * Verifica se o botão remover esta presenta na tela. Se a lista recebida for vazia retorna falso também
 	 * @return
 	 */
-	public boolean verificaBotaoRemoverProduto(String produto) {
+	public boolean verificaBotaoRemoverProduto() {
 		
-		Produto produtoadicionar = mapaprodutos.get(produto);
+		for (Produto produtoadicionar : produtoscarrinho) {
 		
-		if (produtoadicionar!=null) {
-			return elementoEstaPresente(By.id(produtoadicionar.getLocalizador_botao_remover()));
-		} else {
+			if (produtoadicionar!=null) {
+				return elementoEstaPresente(By.id(produtoadicionar.getLocalizador_botao_remover()));
+			} else {
 		
-			return false;
+				return false;
+			}
 		}
+		return false;
 	}
 
 	/**
@@ -257,7 +269,7 @@ public class InventarioPage extends ObjectPageBase {
 		WebElement linkcarrinho = driver.findElement(By.cssSelector(CSSSELECTOR_LINK_CARRINHOCOMPRAS));
 		linkcarrinho.click();
 		
-		return new CartPage (driver);
+		return new CartPage (driver,produtoscarrinho);
 	}
 	
 }
