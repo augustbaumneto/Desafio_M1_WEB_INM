@@ -19,12 +19,13 @@ Funcionalidade: O usuário ao se logar pode escolher e adicionar produtos no car
     Quando clicar no carrinho
     Entao deve ser direcionado para a página do carrinho
     E deve ser exibido o item selecionado com os mesmos dados da página anterior
+
     
-    Exemplos:
-    |         produto				 |
-    |   Sauce Labs Backpack  |
-    |  Sauce Labs Bike Light |
-    | Sauce Labs Bolt T-Shirt|
-    |Sauce Labs Fleece Jacket|
-    |    Sauce Labs Onesie   |
-    |      T-Shirt (Red)     |
+      Exemplos:
+      |         produto				 |
+      |   Sauce Labs Backpack  |
+      |  Sauce Labs Bike Light |
+      | Sauce Labs Bolt T-Shirt|
+      |Sauce Labs Fleece Jacket|
+      |    Sauce Labs Onesie   |
+      |      T-Shirt (Red)     |

@@ -11,6 +11,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ObjectPageBase {
 
+	//Parâmetros utilizados para identificar produtos
+	protected final static String GHERKIN_PROD1_BACKPACK="Sauce Labs Backpack";
+	protected final static String GHERKIN_PROD2_BIKELIGHT="Sauce Labs Bike Light";
+	protected final static String GHERKIN_PROD3_BOLTTSHIRT="Sauce Labs Bolt T-Shirt";
+	protected final static String GHERKIN_PROD4_FLEECEJACKET="Sauce Labs Fleece Jacket";
+	protected final static String GHERKIN_PROD5_ONESIE="Sauce Labs Onesie";
+	protected final static String GHERKIN_PROD6_TSHIRTRED="T-Shirt (Red)";
+	
 	//Timeout padrão de espera do selenium em segundos
 	private static final long TIMEOUT_PADRAO = 2;
 

@@ -134,5 +134,5 @@ public class LoginSteps {
 	    usuario = MassaUiLogin.USUARIO_BLOQUEADO_USERNAME;
 	    senha = MassaUiLogin.SENHA_OK;
 	}
-	
+
 }
