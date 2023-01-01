@@ -1,6 +1,8 @@
 package br.com.inm.saucedemo.e2e.pages;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,6 +10,8 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import br.com.inm.saucedemo.modelos.Produto;
 
 public class ObjectPageBase {
 
@@ -111,6 +115,51 @@ public class ObjectPageBase {
 
 			return false;
 		}
+	}
+	
+	/**
+	 *  Captura os dados dos itens exibidos na tela e monta a lista de produtos exibida 
+	 * @param tamanholistaexibida (tamanho em tela da lista exibida)
+	 * @param posicaoiniciolista (No cssselector em qual posição a partir do localizador base da lista
+	 * 								começa o primeiro produto
+	 * @param csslocalizadorbasedoitemdalista	CSS Selector que representa um item da lista exibida
+	 * @param css_sufixo_localizador_nome
+	 * @param css_sufixo_localizador_link
+	 * @param css_sufixo_localizador_descricao
+	 * @param css_sufixo_localizador_preco
+	 * @param css_sufixo_localizador_botaoremover
+	 * @return
+	 */
+	protected List<Produto> constroiListaProdutosExibidos(int tamanholistaexibida, int posicaoiniciolista,
+						String csslocalizadorbasedoitemdalista, String css_sufixo_localizador_nome, 
+						String css_sufixo_localizador_link, String css_sufixo_localizador_descricao,
+						String css_sufixo_localizador_preco, String css_sufixo_localizador_botaoremover) {
+		List<Produto> produtosexibidos= new ArrayList<>();
+		
+		for(int i=posicaoiniciolista; i<=posicaoiniciolista-1+tamanholistaexibida;i=i+1) {
+			String localizadoritem = csslocalizadorbasedoitemdalista+":nth-child("+i+")";
+			if(elementoEstaPresente(By.cssSelector(localizadoritem))) {
+				Produto produto = new Produto(localizadoritem+css_sufixo_localizador_nome,
+						localizadoritem+css_sufixo_localizador_link, 
+						localizadoritem+css_sufixo_localizador_descricao,
+						localizadoritem+css_sufixo_localizador_preco,
+						localizadoritem+css_sufixo_localizador_botaoremover);
+				//Captura os dados de texto da tela
+				String txtnome = driver.findElement(By.cssSelector(produto.getLocalizador_nome_produto())).getText();
+				produto.setNome_produto(txtnome);
+				String txtdescricao = driver.findElement(By.cssSelector(produto.getLocalizador_descricao())).getText();
+				produto.setDescricao_produto(txtdescricao);
+				String txtvalor = driver.findElement(By.cssSelector(produto.getLocalizador_valor())).getText();
+				produto.setValor(txtvalor);
+				
+				produtosexibidos.add(produto);
+				
+			} else {
+			
+				break;
+			}
+		}
+		return produtosexibidos;
 	}
 	
 }

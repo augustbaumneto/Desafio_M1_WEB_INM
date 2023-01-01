@@ -18,7 +18,7 @@ import io.cucumber.java.pt.Quando;
 
 /**
  * 
- * Classe que contem os steps da feature adicionar produtos. Alguns steps de login estão armazenados na classe loginsteps
+ * Classe que contem os steps da feature adicionar produtos.
  * 
  * @author August Neto
  *
@@ -90,6 +90,12 @@ public class AdicionarProdutosSteps {
 		assertTrue(paginainventario.adicionarProduto(prod1),"Problem na massa!!! Produto inexistente");
 		assertTrue(paginainventario.adicionarProduto(prod2),"Problem na massa!!! Produto inexistente");
 
+	}
+	
+	@Entao("não deve ser apresentado itens na tela")
+	public void não_deve_ser_apresentado_itens_na_tela() {
+		assertTrue(paginacarrinho.verificaItensNoCarrinho());
+		paginacarrinho.clean();
 	}
 	
 }

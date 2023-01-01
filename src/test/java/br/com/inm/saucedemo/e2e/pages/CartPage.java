@@ -3,11 +3,11 @@
  */
 package br.com.inm.saucedemo.e2e.pages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import br.com.inm.saucedemo.modelos.Produto;
 
@@ -24,14 +24,18 @@ public class CartPage extends ObjectPageBase {
 	//Produtos exibidos
 	private List<Produto> produtosexibidos;
 	
+	//Tamanho máximo de itens possíveis na tela
 	private final static int TAMANHOMAX_LISTAPRODUTOS = 6;
+	//Primeira criança no CSS da lista de itens exibidos
+	private final static int PRIMEIRO_ITEM_DA_LISTA_CSS = 3;
 	
 	private final static String URL_PAGINA_CARRINHO = "https://www.saucedemo.com/cart.html";
 	
 	private final static String CSSSELECTOR_LABEL_YOURCART = "#header_container .title";
+	private final static String ID_BOTAO_CHECKOUT = "checkout";
 	
 	//Localizadores da lista de produtos
-	private final static String BASE_LISTA_PROD = ".cart_item:nth-child(";
+	private final static String CSS_BASE_ITEMLISTA_PROD = ".cart_item"; //Sem nth
 	
 	private final static String CSS_SUFIXO_LISTA_PROD_NOME = " .inventory_item_name";
 	private final static String CSS_SUFIXO_LISTA_PROD_LINK = " a";
@@ -39,7 +43,6 @@ public class CartPage extends ObjectPageBase {
 	private final static String CSS_SUFIXO_LISTA_PROD_PRECO = " .inventory_item_price";
 	private final static String CSS_SUFIXO_LISTA_PROD_BOTAO_REMOVER = " button";
 	
-	//Primeiro item da lista
 	
 	
 	/**
@@ -50,37 +53,13 @@ public class CartPage extends ObjectPageBase {
 	public CartPage(WebDriver driver, List<Produto> produtosadicionados) {
 		super(driver, null);
 		this.produtosadicionados=produtosadicionados;
-		constroiListaProdutosExibidos();
+		this.produtosexibidos = constroiListaProdutosExibidos(TAMANHOMAX_LISTAPRODUTOS,
+					PRIMEIRO_ITEM_DA_LISTA_CSS,CSS_BASE_ITEMLISTA_PROD, CSS_SUFIXO_LISTA_PROD_NOME,
+					CSS_SUFIXO_LISTA_PROD_LINK,	CSS_SUFIXO_LISTA_PROD_DESCRICAO,
+					CSS_SUFIXO_LISTA_PROD_PRECO, CSS_SUFIXO_LISTA_PROD_BOTAO_REMOVER);
 	}
 
-	private void constroiListaProdutosExibidos() {
-		produtosexibidos= new ArrayList<>();
-		
-		for(int i=3; i<=2+TAMANHOMAX_LISTAPRODUTOS;i=i+1) {
-			String localizadoritem = BASE_LISTA_PROD+i+")";
-			if(elementoEstaPresente(By.cssSelector(localizadoritem))) {
-				Produto produto = new Produto(localizadoritem+CSS_SUFIXO_LISTA_PROD_NOME,
-						localizadoritem+CSS_SUFIXO_LISTA_PROD_LINK, 
-						localizadoritem+CSS_SUFIXO_LISTA_PROD_DESCRICAO,
-						localizadoritem+CSS_SUFIXO_LISTA_PROD_PRECO,
-						localizadoritem+CSS_SUFIXO_LISTA_PROD_BOTAO_REMOVER);
-				//Captura os dados de texto da tela
-				String txtnome = driver.findElement(By.cssSelector(produto.getLocalizador_nome_produto())).getText();
-				produto.setNome_produto(txtnome);
-				String txtdescricao = driver.findElement(By.cssSelector(produto.getLocalizador_descricao())).getText();
-				produto.setDescricao_produto(txtdescricao);
-				String txtvalor = driver.findElement(By.cssSelector(produto.getLocalizador_valor())).getText();
-				produto.setValor(txtvalor);
-				
-				produtosexibidos.add(produto);
-				
-			} else {
-			
-				break;
-			}
-		}
-		
-	}
+
 	
 	/**
 	 * Verifica se esta na página do carrinho
@@ -116,6 +95,16 @@ public class CartPage extends ObjectPageBase {
 
 		}
 		return true;
+	}
+
+	/**
+	 * Inicia o procedimento de checkout clicando no botão checkout
+	 */
+	public CheckoutInformacionPage iniciarCheckout() {
+		WebElement botaocheckout = driver.findElement(By.id(ID_BOTAO_CHECKOUT));
+		botaocheckout.click();
+		
+		return new CheckoutInformacionPage(driver, produtosexibidos);
 	}
 	
 }
