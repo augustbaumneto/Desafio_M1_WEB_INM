@@ -6,7 +6,7 @@ package br.com.inm.saucedemo.acceptance.steps;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.inm.saucedemo.e2e.pages.CartPage;
-import br.com.inm.saucedemo.e2e.pages.CheckoutComplete;
+import br.com.inm.saucedemo.e2e.pages.CheckoutCompletePage;
 import br.com.inm.saucedemo.e2e.pages.CheckoutInformacionPage;
 import br.com.inm.saucedemo.e2e.pages.CheckoutOverviewPage;
 import br.com.inm.saucedemo.e2e.pages.InventarioPage;
@@ -33,7 +33,7 @@ public class CheckoutSteps {
 	private CartPage paginacarrinho;
 	private CheckoutInformacionPage paginainformacaocheckout;
 	private CheckoutOverviewPage paginaconfirmacaodadoscheckout;
-	private CheckoutComplete paginaconclusaocheckout;
+	private CheckoutCompletePage paginaconclusaocheckout;
 	
 	//Massas
 	private String navegador = MassaUiBase.NAVEGADOR_FIREFOX;
@@ -108,16 +108,18 @@ public class CheckoutSteps {
 	@Entao("deve ser exibida a página de conclusão do checkout")
 	public void deve_ser_exibida_a_página_de_conclusão_do_checkout() {
 		assertTrue(paginaconclusaocheckout.ePaginaConclusaoCheckout());
+		assertTrue(paginaconclusaocheckout.verificaTextoTituloConclusao());
 	}
 	
 	@Entao("deve ser exibida mensagem de confimação da ordem")
 	public void deve_ser_exibida_mensagem_de_confimação_da_ordem() {
-
+		assertTrue(paginaconclusaocheckout.verificaMensagemConfirmacaoOrdem());
 	}
 
 	@Entao("carrinho deve estar vazio")
 	public void carrinho_deve_estar_vazio() {
-		paginaconfirmacaodadoscheckout.clean();
+		assertTrue(paginaconclusaocheckout.verificaCarrinhoVazio());
+		paginaconclusaocheckout.clean();
 	}	
 	
 }

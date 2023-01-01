@@ -41,7 +41,7 @@ public class CheckoutOverviewPage extends ObjectPageBase {
 	private static final String CSS_SUFIXO_LISTA_PROD_PRECO = " .inventory_item_price";
 		
 	
-	private static final Object MSG_TITULO = "CHECKOUT: OVERVIEW";
+	private static final String MSG_TITULO = "CHECKOUT: OVERVIEW";
 
 	
 	private List<Produto> listacompras;
@@ -78,11 +78,7 @@ public class CheckoutOverviewPage extends ObjectPageBase {
 	public boolean verificaTextoTituloOverview() {
 		By localizadortitulo = By.cssSelector(CSS_LABEL_TITULOOVERVIEW);
 		
-		if(elementoEstaPresente(localizadortitulo)) {
-			String txttitulo = driver.findElement(localizadortitulo).getText();
-			return txttitulo.equals(MSG_TITULO);
-		}
-		return false;
+		return verificaSeMensagemEApresentadaLocalizador(localizadortitulo, MSG_TITULO);
 	}
 
 	/**
@@ -157,11 +153,11 @@ public class CheckoutOverviewPage extends ObjectPageBase {
 	 * Finaliza o checkout
 	 * @return
 	 */
-	public CheckoutComplete finalizar() {
+	public CheckoutCompletePage finalizar() {
 		WebElement botaofinalizar = driver.findElement(By.id(ID_BOTAO_FINALIZAR));
 		botaofinalizar.click();
 		
-		return new CheckoutComplete(driver);
+		return new CheckoutCompletePage(driver);
 	}
 	
 }

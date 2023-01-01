@@ -94,7 +94,7 @@ public class LoginPage extends ObjectPageBase {
      * 
      * @return
      */
-	public boolean estaNaPaginaDeLogin() {
+	public boolean ePaginaDeLogin() {
 		
 		return ePaginaAtual(URL_LOGIN_PAGE);
 	}
@@ -107,8 +107,9 @@ public class LoginPage extends ObjectPageBase {
 	 * @return
 	 */
 	public boolean mensagemErroUsuarioESenhaNaoCombinamExibida() {
-		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		return labelerro.getText().equals(MSG_ERRO_USUARIOEOUSENHAERRADOS);
+		By localizadormenserro = By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN);
+		
+		return verificaSeMensagemEApresentadaLocalizador(localizadormenserro, MSG_ERRO_USUARIOEOUSENHAERRADOS);
 	}
 	
 	/**
@@ -118,8 +119,9 @@ public class LoginPage extends ObjectPageBase {
 	 * @return
 	 */
 	public boolean mensagemErroFaltaSenhaExibida() {
-		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		return labelerro.getText().equals(MSG_ERRO_SENHAFALTANDO);
+		By localizadormenserro = By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN);
+		
+		return verificaSeMensagemEApresentadaLocalizador(localizadormenserro, MSG_ERRO_SENHAFALTANDO);
 	}
 	
 	/**
@@ -129,8 +131,9 @@ public class LoginPage extends ObjectPageBase {
 	 * @return
 	 */
 	public boolean mensagemErroFaltaUsuarioExibida() {
-		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		return labelerro.getText().equals(MSG_ERRO_USUARIOFALTANDO);
+		By localizadormenserro = By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN);
+		
+		return verificaSeMensagemEApresentadaLocalizador(localizadormenserro, MSG_ERRO_USUARIOFALTANDO);
 	}
 
 	/**
@@ -140,8 +143,9 @@ public class LoginPage extends ObjectPageBase {
 	 * @return
 	 */
 	public boolean mensagemErroUsuarioBloqueadoExibida() {
-		WebElement labelerro = driver.findElement(By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN));
-		return labelerro.getText().equals(MSG_ERRO_USUARIOBLOQUEADO);
+		By localizadormenserro = By.cssSelector(CSSSELECTOR_LABEL_MENSAGEMERROLOGIN);
+		
+		return verificaSeMensagemEApresentadaLocalizador(localizadormenserro, MSG_ERRO_USUARIOBLOQUEADO);
 	}
 	
 }

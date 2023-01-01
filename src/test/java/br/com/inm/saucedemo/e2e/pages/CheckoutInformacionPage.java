@@ -59,12 +59,8 @@ public class CheckoutInformacionPage extends ObjectPageBase {
 	 */
 	public boolean verificaTextoSuasInformacoes() {
 		By localizadortitulo = By.cssSelector(CSS_LABEL_TITULOSUASINFORMACOES);
-		if(elementoEstaPresente(localizadortitulo)) {
-			String txttitulo = driver.findElement(localizadortitulo).getText();
-			return txttitulo.equals(MSG_TITULO);
-		}
 		
-		return false;
+		return verificaSeMensagemEApresentadaLocalizador(localizadortitulo, MSG_TITULO);
 	}
 
 	/**

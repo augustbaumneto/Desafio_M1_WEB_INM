@@ -36,6 +36,7 @@ public class InventarioPage extends ObjectPageBase {
 	private final static String CSSSELECTOR_LINK_CARRINHOCOMPRAS = "#shopping_cart_container .shopping_cart_link";
 	private final static String CSSSELECTOR_CONTEUDO_CARRINHOCOMPRAS = CSSSELECTOR_LINK_CARRINHOCOMPRAS
 																	+ " span";
+	private static final String CSS_LABEL_TITULOINVENTARIO = "#header_container .title";
 	
 	private static final String BASE_PRODS="#inventory_container.inventory_container .inventory_item:nth-child";
 	//Dados produto 1
@@ -97,6 +98,10 @@ public class InventarioPage extends ObjectPageBase {
 	private static final String BASE_PROD6_TSHIRTRED =BASE_PRODS+"(6)";
 	private static final String CSS_LABEL_PROD6_DESCRICAOTSHIRTRED= BASE_PROD6_TSHIRTRED+ " .inventory_item_desc";
 	private static final String CSS_LABEL_PROD6_PRECOTSHIRTRED = BASE_PROD6_TSHIRTRED+ " .inventory_item_price";
+
+	
+
+	private static final String MSG_TITULO = "PRODUCTS";
 	
 	/**
 	 * Construtor padrão
@@ -105,7 +110,8 @@ public class InventarioPage extends ObjectPageBase {
 	 */
 	public InventarioPage(WebDriver driver) {
 		super(driver, null);
-		constroiMapa();
+		if (ePaginaInventario())
+			constroiMapa();
 	}
 	
 	/**
@@ -178,7 +184,7 @@ public class InventarioPage extends ObjectPageBase {
 	 * 
 	 * @return
 	 */
-	public boolean estaNaPaginaInventario() {
+	public boolean ePaginaInventario() {
 		
 		return ePaginaAtual(URL_PAGINA_INVENTARIO);
 	}
@@ -270,6 +276,16 @@ public class InventarioPage extends ObjectPageBase {
 		linkcarrinho.click();
 		
 		return new CartPage (driver,produtoscarrinho);
+	}
+	
+	/**
+	 * Verifica se o texto no inicio da página é o texto identificando a página corretamente
+	 * @return
+	 */
+	public boolean verificaTextoTituloInventario() {
+		By localizadortitulo = By.cssSelector(CSS_LABEL_TITULOINVENTARIO);
+		
+		return verificaSeMensagemEApresentadaLocalizador(localizadortitulo, MSG_TITULO);
 	}
 	
 }

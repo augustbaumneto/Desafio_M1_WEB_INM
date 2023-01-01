@@ -162,4 +162,20 @@ public class ObjectPageBase {
 		return produtosexibidos;
 	}
 	
+	/**
+	 * Verifica se a mensagem repassada é apresentada no item informado no localizador
+	 * @param localizador
+	 * @param mensagem
+	 * @return
+	 */
+	protected boolean verificaSeMensagemEApresentadaLocalizador(By localizador, String mensagem) {
+				
+		if(elementoEstaPresente(localizador)) {
+			String txtlabel = driver.findElement(localizador).getText().toLowerCase();
+			return txtlabel.equals(mensagem.toLowerCase());
+		}
+		
+		return false;
+	}
+	
 }

@@ -43,6 +43,7 @@ public class CartPage extends ObjectPageBase {
 	private final static String CSS_SUFIXO_LISTA_PROD_PRECO = " .inventory_item_price";
 	private final static String CSS_SUFIXO_LISTA_PROD_BOTAO_REMOVER = " button";
 	
+	private static final String MSG_TITULO = "YOUR CART";
 	
 	
 	/**
@@ -74,7 +75,9 @@ public class CartPage extends ObjectPageBase {
 	 * @return
 	 */
 	public boolean verificaTextoSeuCarrinho() {
-		return elementoEstaPresente(By.cssSelector(CSSSELECTOR_LABEL_YOURCART));
+		By localizadortitulo = By.cssSelector(CSSSELECTOR_LABEL_YOURCART);
+		
+		return verificaSeMensagemEApresentadaLocalizador(localizadortitulo, MSG_TITULO);
 	}
 	
 	/**

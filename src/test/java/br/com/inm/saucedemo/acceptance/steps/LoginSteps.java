@@ -45,9 +45,10 @@ public class LoginSteps {
 	@Entao("é redirecionado para a página de inventário")
 	public void é_redirecionado_para_a_página_de_inventário() {
 	    
-		assertTrue(paginainventario.estaNaPaginaInventario());
-		assertFalse(paginalogin.estaNaPaginaDeLogin());
+		assertTrue(paginainventario.ePaginaInventario());
+		assertFalse(paginalogin.ePaginaDeLogin());
 		assertTrue(paginainventario.verificaBotaoCarrinhoCompras());
+		assertTrue(paginainventario.verificaTextoTituloInventario());
 		
 		paginainventario.clean();
 	}
@@ -95,8 +96,8 @@ public class LoginSteps {
 	
 	@Entao("deve continua na pagina de login")
 	public void deve_continua_na_pagina_de_login() {
-		assertFalse(paginainventario.estaNaPaginaInventario());
-		assertTrue(paginalogin.estaNaPaginaDeLogin());
+		assertFalse(paginainventario.ePaginaInventario());
+		assertTrue(paginalogin.ePaginaDeLogin());
 	}
 	
 	@Entao("mensagem de erro informando que {string} é apresentada")
