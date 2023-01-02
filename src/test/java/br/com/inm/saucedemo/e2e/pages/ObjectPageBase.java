@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.inm.saucedemo.modelos.Produto;
 
-public class ObjectPageBase {
+public abstract class ObjectPageBase {
 
 	//Parâmetros utilizados para identificar produtos
 	protected final static String GHERKIN_PROD1_BACKPACK="Sauce Labs Backpack";

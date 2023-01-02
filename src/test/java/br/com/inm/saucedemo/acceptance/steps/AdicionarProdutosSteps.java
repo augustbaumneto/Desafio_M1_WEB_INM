@@ -37,7 +37,10 @@ public class AdicionarProdutosSteps {
 	
 	private String prod1 = MassaUiProdutos.PRODUTO1;
 	private String prod2 = MassaUiProdutos.PRODUTO5;
-	
+	private String prod3 = MassaUiProdutos.PRODUTO2;
+	private String prod4 = MassaUiProdutos.PRODUTO3;
+	private String prod5 = MassaUiProdutos.PRODUTO4;
+	private String prod6 = MassaUiProdutos.PRODUTO6;
 	
 	
 	@Dado("um usuario logado na página de inventário")
@@ -96,6 +99,16 @@ public class AdicionarProdutosSteps {
 	public void não_deve_ser_apresentado_itens_na_tela() {
 		assertTrue(paginacarrinho.verificaItensNoCarrinho());
 		paginacarrinho.clean();
+	}
+
+	@Quando("escolho seis produtos e clico no botao adicionar no carrinho equivalente de ambos")
+	public void escolho_seis_produtos_e_clico_no_botao_adicionar_no_carrinho_equivalente_de_ambos() {
+		assertTrue(paginainventario.adicionarProduto(prod1),"Problem na massa!!! Produto inexistente");
+		assertTrue(paginainventario.adicionarProduto(prod2),"Problem na massa!!! Produto inexistente");
+		assertTrue(paginainventario.adicionarProduto(prod3),"Problem na massa!!! Produto inexistente");
+		assertTrue(paginainventario.adicionarProduto(prod4),"Problem na massa!!! Produto inexistente");
+		assertTrue(paginainventario.adicionarProduto(prod5),"Problem na massa!!! Produto inexistente");
+		assertTrue(paginainventario.adicionarProduto(prod6),"Problem na massa!!! Produto inexistente");
 	}
 	
 }

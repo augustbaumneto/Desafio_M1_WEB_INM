@@ -43,6 +43,10 @@ public class CheckoutSteps {
 	
 	private String prod1 = MassaUiProdutos.PRODUTO1;
 	private String prod2 = MassaUiProdutos.PRODUTO6;
+	private String prod3 = MassaUiProdutos.PRODUTO2;
+	private String prod4 = MassaUiProdutos.PRODUTO3;
+	private String prod5 = MassaUiProdutos.PRODUTO4;
+	private String prod6 = MassaUiProdutos.PRODUTO5;
 	
 	private String nome = MassaUiDadosCliente.NOME_OK;
 	private String sobrenome = MassaUiDadosCliente.SOBRENOME_OK;
@@ -54,10 +58,25 @@ public class CheckoutSteps {
 		paginainventario = paginalogin.efetuarLogin(usuario, senha);
 	}
 	
-	@Dado("existem produtos no carrinho")
-	public void existem_produtos_no_carrinho() {
-		assertTrue(paginainventario.adicionarProduto(prod1),"Problem na massa!!! Produto inexistente");
-		assertTrue(paginainventario.adicionarProduto(prod2),"Problem na massa!!! Produto inexistente");
+	@Dado("existem {int} produtos no carrinho")
+	public void existem_produtos_no_carrinho(int quantidadedeprodutos) {
+	    
+		if (quantidadedeprodutos>0 && quantidadedeprodutos<7) {
+			switch(quantidadedeprodutos) {
+				case 6:
+					assertTrue(paginainventario.adicionarProduto(prod6),"Problem na massa!!! Produto inexistente");
+				case 5:
+					assertTrue(paginainventario.adicionarProduto(prod5),"Problem na massa!!! Produto inexistente");
+				case 4:
+					assertTrue(paginainventario.adicionarProduto(prod4),"Problem na massa!!! Produto inexistente");				
+				case 3:
+					assertTrue(paginainventario.adicionarProduto(prod3),"Problem na massa!!! Produto inexistente");
+				case 2:
+					assertTrue(paginainventario.adicionarProduto(prod2),"Problem na massa!!! Produto inexistente");
+	    		default:
+	    			assertTrue(paginainventario.adicionarProduto(prod1),"Problem na massa!!! Produto inexistente");
+	    	}
+		}
 		paginacarrinho=paginainventario.clicarLinkCarrinhoCompras();
 	}
 	

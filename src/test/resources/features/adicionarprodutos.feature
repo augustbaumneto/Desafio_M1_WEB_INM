@@ -45,3 +45,15 @@ Funcionalidade: O usuário ao se logar pode escolher e adicionar produtos no car
     Quando clicar no carrinho
     Entao deve ser direcionado para a página do carrinho
     E não deve ser apresentado itens na tela
+    
+ Cenario: Adicionando seis produtos no carrinho pela tela de inventário com carrinho vazio
+    Dado um usuario logado na página de inventário
+    E carrinho esta vazio
+    Quando escolho seis produtos e clico no botao adicionar no carrinho equivalente de ambos
+    Entao botão(s) clicado(s) deve(m) ser alterado(s) para remover
+    E carrinho deve indicar que possui 6 produtos adicionados
+    Quando clicar no carrinho
+    Entao deve ser direcionado para a página do carrinho
+    E deve ser exibido os itens selecionados com os mesmos dados da página anterior  
+  
+    
