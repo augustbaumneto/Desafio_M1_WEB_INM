@@ -20,5 +20,6 @@ public class MassaUiDadosCliente {
 	public static final String NOME_OK = "S'chn";
 	public static final String SOBRENOME_OK = "Spock";
 	public static final String CEP_OK = "12312-345";
+	public static final String NOMEEXAMPLE = "Kirk";
 
 }

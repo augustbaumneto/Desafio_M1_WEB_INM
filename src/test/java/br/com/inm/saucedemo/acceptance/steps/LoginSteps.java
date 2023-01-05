@@ -23,7 +23,7 @@ public class LoginSteps {
 	private LoginPage paginalogin;
 	private InventarioPage paginainventario;
 	
-	private String navegador = MassaUiBase.NAVEGADOR_FIREFOX;
+	private String navegador = MassaUiBase.NAVEGADOR_CHROME;
 	
 	private String usuario;
 	private String senha;
