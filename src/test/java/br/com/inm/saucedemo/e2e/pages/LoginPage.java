@@ -36,10 +36,10 @@ public class LoginPage extends ObjectPageBase {
 	 * 
 	 * Construtor do primeiro acesso
 	 * 
-	 * @param driver
+	 * @param navegador
 	 */
     public LoginPage(String navegador) {
-        super(null,navegador);
+    	super(null,navegador);
         driver.get(URL_LOGIN_PAGE);
     }
     

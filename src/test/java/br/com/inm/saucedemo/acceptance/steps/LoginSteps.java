@@ -23,15 +23,15 @@ public class LoginSteps {
 	private LoginPage paginalogin;
 	private InventarioPage paginainventario;
 	
-	private String navegador = MassaUiBase.NAVEGADOR_CHROME;
+	private String navegador = MassaUiBase.NAVEGADOR_FIREFOX;
 	
 	private String usuario;
 	private String senha;
 	
 	
 	@Dado("um usuario valido não bloqueado")
-	public void um_usuario_valido_nao_bloqueado() {
-	    paginalogin = new LoginPage(navegador);
+	public void um_usuario_valido_nao_bloqueado(){
+		paginalogin = new LoginPage(navegador);
 	    usuario = MassaUiLogin.USUARIO_OK_USERNAME;
 	    senha = MassaUiLogin.SENHA_OK;
 	}
@@ -54,7 +54,7 @@ public class LoginSteps {
 	}
 
 	@Dado("um usuario com username {string} e senha {string}")
-	public void um_usuario_com_username_e_senha(String dado1, String dado2) {
+	public void um_usuario_com_username_e_senha(String dado1, String dado2){
 		paginalogin = new LoginPage(navegador);
 		switch (dado1) {
 			case "correto":{

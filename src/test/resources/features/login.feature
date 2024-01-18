@@ -6,7 +6,7 @@
 Funcionalidade: Apenas usuarios cadastrados podem se logar
 	Usários cadastros utilizando senha e login válidos e não bloqueados conseguem se logar
   
-
+	@smoke
   Cenario: Um usuario valido não bloqueado consegue se logar
     Dado um usuario valido não bloqueado
     Quando tenta se logar

@@ -71,6 +71,7 @@ public abstract class ObjectPageBase {
 	 * @param nomenavegador nome do navegador para teste
 	 */
 	private void criaDriver(String nomenavegador) {
+		
 		driver = new BrowserFactory().createWebDriver(nomenavegador);
 		
 		//Configura um timeout padrão no selenium
@@ -177,5 +178,10 @@ public abstract class ObjectPageBase {
 		
 		return false;
 	}
+	
+	
+	//public WebDriver getdriver() {
+		//return this.driver;
+	//}
 	
 }

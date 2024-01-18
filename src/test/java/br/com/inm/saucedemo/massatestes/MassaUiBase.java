@@ -19,12 +19,11 @@ public class MassaUiBase {
 	//Navegador
 	public static final String NAVEGADOR_CHROME = "chrome";
 	public static final String NAVEGADOR_FIREFOX = "firefox";
-	public static final String NAVEGADOR_INTERNO = "unit";
+	//public static final String NAVEGADOR_INTERNO = "unit"; //Não recomendado por não rodar com javascript quebrado.
 	
 	/**
 	 */
 	public MassaUiBase() {
 
 	}
-
 }
