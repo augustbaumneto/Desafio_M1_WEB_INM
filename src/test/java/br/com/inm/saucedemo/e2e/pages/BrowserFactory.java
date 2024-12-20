@@ -22,11 +22,11 @@ public class BrowserFactory {
 	// retire o comentário das linhas de baixo e substitua o caminho pela aonde se localiza seu driver 
 	
 	//private static final String CHROMEDRIVER_PATH = "C:\\Users\\stepp\\Desktop\\curso-bdd\\workspace\\leilao\\drivers\\chromedriver.exe";
-	//private static final String FIREFOXDRIVER_PATH = "C:\\Automacao_desenvolvimento\\SeleniumDrivers\\geckodriver.exe";
+	//private static final String FIREFOXDRIVER_PATH = "C:\\Automação_desenvolvimento\\SeleniumDrivers\\geckodriver.exe";
 
 	//Caso seu firefox esteja instalado fora da pasta arquivos de programa, utilizar a linha abaixo para indicar a 
 	//localização do executável 
-	private static final String FIREFOX_BINARY_PATH = "C:\\Users\\augustbn\\AppData\\Local\\Mozilla Firefox\\firefox.exe";
+	//private static final String FIREFOX_BINARY_PATH = "C:\\Users\\augustbn\\AppData\\Local\\Mozilla Firefox\\firefox.exe";
 	
 	/**
 	 * 
@@ -85,7 +85,7 @@ public class BrowserFactory {
 		FirefoxOptions options = new FirefoxOptions();
 		//Fornecer o caminho do executável do Firefox, se estiver no caminho padrão retirar 
 		// a linha abaixo
-		options.setBinary(FIREFOX_BINARY_PATH);
+		//options.setBinary(FIREFOX_BINARY_PATH);
 		
 		// Se será uma execução headless
 		options.setHeadless(TipoExecucao.FORMA_EXECUCAO.getFlag());
