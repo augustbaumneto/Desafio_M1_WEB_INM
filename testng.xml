@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://ttestng.org/testng-1.0.dtd">
+
+<suite thread-count="2" verbose="1" name="Parallel Test Suite" annotations="JDK" parallel="tests">
+
+	<test name="RunCarrinhoTest">
+		<classes>
+			<class name="suite1.RunCarrinhoTest"/>
+		</classes>
+	</test>
+	<test name="RunLoginTest">
+		<classes>
+			<class name="suite2.RunLoginTest"/>
+		</classes>
+	</test>
+</suite>
