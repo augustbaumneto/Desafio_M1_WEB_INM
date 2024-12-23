@@ -4,12 +4,12 @@
 
 	<test name="RunCarrinhoTest">
 		<classes>
-			<class name="suite1.RunCarrinhoTest"/>
+			<class name="suite1.RunCarrinhoTests"/>
 		</classes>
 	</test>
 	<test name="RunLoginTest">
 		<classes>
-			<class name="suite2.RunLoginTest"/>
+			<class name="suite2.RunLoginTests"/>
 		</classes>
 	</test>
 </suite>
