@@ -108,10 +108,12 @@ public class BrowserFactory {
 	private String getParametroNavegadorEntrada() {
 		String navegador = System.getProperty("navegador");
 		
+		if (navegador == null)
+			return "empty";
 		if (!navegador.equals("firefox") && !navegador.equals("chrome")) {
 			navegador = "empty";
 		}
-		return navegador;
 		
+		return navegador;
 	}
 }
