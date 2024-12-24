@@ -37,7 +37,14 @@ public class BrowserFactory {
 	 * 
 	 */
 	public WebDriver createWebDriver(String nomenavegador) {
-		String webdriver = System.getProperty("browser", nomenavegador);
+		String navegadorentrada = getParametroNavegadorEntrada();
+		String webdriver;
+
+		//Verifica se foi um navegador válido, se não for utiliza o setado no código.
+		if (navegadorentrada.equals("empty"))
+			webdriver = System.getProperty("browser", nomenavegador);
+		else
+			webdriver = navegadorentrada; 
 		switch (webdriver) {
 			case "firefox":
 				return initFirefoxDriver();
@@ -90,5 +97,21 @@ public class BrowserFactory {
 		// Se será uma execução headless
 		options.setHeadless(TipoExecucao.FORMA_EXECUCAO.getFlag());
 		return new FirefoxDriver(options);
+	}
+	
+	/**
+	 * Método que captura o valor do browser de entrada
+	 * 
+	 * 
+	 * @return String o navegador, ou "empty" se não for informado um navegador válido
+	 */
+	private String getParametroNavegadorEntrada() {
+		String navegador = System.getProperty("navegador");
+		
+		if (!navegador.equals("firefox") && !navegador.equals("chrome")) {
+			navegador = "empty";
+		}
+		return navegador;
+		
 	}
 }
