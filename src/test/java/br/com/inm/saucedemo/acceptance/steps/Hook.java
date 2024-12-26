@@ -3,6 +3,7 @@
  */
 package br.com.inm.saucedemo.acceptance.steps;
 
+import br.com.inm.saucedemo.configuracao.EnderecosConfiguracao;
 import br.com.inm.saucedemo.utils.ManipulacaoArquivo;
 import io.cucumber.java.BeforeAll;
 
@@ -16,7 +17,7 @@ public class Hook {
 	 */
 	@BeforeAll
 	public static void setupRelatorios() {
-		ManipulacaoArquivo.criaPasta("target/reports");
+		ManipulacaoArquivo.criaPasta(EnderecosConfiguracao.getcaminhorelatorios());
 	}
 	
 }
